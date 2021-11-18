@@ -1,0 +1,59 @@
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\appsettings.Development.json
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\appsettings.json
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\SoftMedia Task.exe
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\SoftMedia Task.deps.json
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\SoftMedia Task.runtimeconfig.json
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\SoftMedia Task.runtimeconfig.dev.json
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\SoftMedia Task.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\ref\SoftMedia Task.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\SoftMedia Task.pdb
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\SoftMedia Task.Views.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\SoftMedia Task.Views.pdb
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\System.Net.Http.Formatting.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\System.Web.Http.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\System.Web.Http.WebHost.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\Microsoft.OpenApi.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\Microsoft.Web.Infrastructure.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\Swashbuckle.Core.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\WebActivatorEx.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\SoftMedia Task.csproj.AssemblyReference.cache
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\SoftMedia Task.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\SoftMedia Task.AssemblyInfoInputs.cache
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\SoftMedia Task.AssemblyInfo.cs
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\SoftMedia Task.csproj.CoreCompileInputs.cache
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\SoftMedia Task.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\SoftMedia Task.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\SoftMedia Task.RazorAssemblyInfo.cache
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\SoftMedia Task.RazorAssemblyInfo.cs
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\staticwebassets\SoftMedia Task.StaticWebAssets.Manifest.cache
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\staticwebassets\SoftMedia Task.StaticWebAssets.xml
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\scopedcss\bundle\SoftMedia Task.styles.css
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\SoftMedia Task.TagHelpers.input.cache
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\SoftMedia Task.TagHelpers.output.cache
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\SoftMedia Task.RazorCoreGenerate.cache
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\SoftMedia Task.RazorTargetAssemblyInfo.cache
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\SoftMedia Task.RazorTargetAssemblyInfo.cs
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\SoftMedia Task.Views.pdb
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\SoftMedia Task.csproj.CopyComplete
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\SoftMedia Task.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\ref\SoftMedia Task.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\SoftMedia Task.pdb
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\obj\Debug\net5.0\SoftMedia Task.genruntimeconfig.cache
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\Npgsql.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Krotiara\source\repos\SoftMedia Task\SoftMedia Task\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
