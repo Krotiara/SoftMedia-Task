@@ -27,9 +27,11 @@ namespace SoftMedia_Task
         {
 
             string connectionString = Configuration.GetConnectionString("PostgresConnection");
-            services.AddDbContext<StudentContext>(options => options.UseNpgsql(connectionString));
-
+            services.AddDbContext<StudentContext>(options => options.UseNpgsql(connectionString)); 
+            services.AddControllersWithViews();
+            
             services.AddSwaggerGen(); // Inject an implementation of ISwaggerProvider with defaulted settings applied 
+
             services.ConfigureSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
@@ -38,36 +40,46 @@ namespace SoftMedia_Task
                     Title = "SoftMedia Task"
                 });
             });
-            services.AddControllers();
-            
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //app.UseMvcWithDefaultRoute();
-            
-            //app.UseHttpsRedirection();
-            //app.UseStaticFiles();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+            }
+            app.UseHttpsRedirection(); // добавляет для проекта переадресацию на тот же ресурс только по протоколу https
+            app.UseStaticFiles();
 
-            ////app.UseRouting();
+            app.UseRouting(); 
 
-            //app.UseAuthorization();
+            app.UseAuthorization();
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "SoftMedia Task");
-                options.RoutePrefix = string.Empty; // provide Swagger UI in the root 
+                //options.RoutePrefix = string.Empty; // provide Swagger UI in the root 
             });
-            app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
-               //// swagger / index.html
-               // endpoints.MapControllerRoute(
-               //     name: "default",
-               //     pattern: "{controller=Home}/{action=Index}/{id?}");
+                //endpoints.MapControllers();
+                //endpoints.MapControllers();
+                //// swagger / index.html
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+               
             });
+            
+
         }
     }
 }
