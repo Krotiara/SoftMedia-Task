@@ -11,10 +11,17 @@ namespace SoftMedia_Task.Models
     public class AcademicPerfomance
     {
         [Key]
-        [Column("Student id")]
-        public int StudentId { get; set; }
+        [Column("Id")]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)] //база данных сама генерирует значение
+        public int AcademicRecordID { get; set; }
 
+        [Display(Name = "Academic perfomance")]
         [Column("Academic perfomance")]
         public string AcademicRecord { get; set; }
+
+        //Внешний ключ
+        [Column("StudentId")]
+        public int StudentId { get; set; }
+        public Student Student { get; set; }
     }
 }

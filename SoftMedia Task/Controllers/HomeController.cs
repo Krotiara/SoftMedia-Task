@@ -22,64 +22,85 @@ namespace SoftMedia_Task.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-           // IEnumerable<StudentDto> items = GetStudentsList().Result.Value;
-          
-            return View("Index", GetStudentsList().Result.Value);
+            // IEnumerable<StudentDto> items = GetStudentsList().Result.Value;
+            ViewData["Students"] = studentsDb.Students.Include(x => x.AcademicPerfomance).ToList(); //Async todo
+            //return View("Index", GetStudentsList().Result.Value);
+            return View("Index");
         }
 
         [HttpGet, Route("data")]
-        public async Task<ActionResult<IEnumerable<StudentDto>>> GetStudentsList()
+        public async Task<ActionResult<IEnumerable<Student>>> GetStudentsList()
         {
-            var items = await studentsDb.Students.Join(studentsDb.AcademicPerfomances, u => u.Id, c => c.StudentId,
-                (u, c) => new StudentDto
-                {
-                    Id = u.Id,
-                    FullName = u.FullName,
-                    Birthdate = u.Birthdate.Date,
-                    AcademicRecord = c.AcademicRecord
-                }).ToListAsync();
-            return items;
+            //var items = await studentsDb.Students.Join(studentsDb.AcademicPerfomances, u => u.AcademicPerfomance.Id, c => c.Id,
+            //    (u, c) => new StudentDto
+            //    {
+            //        Id = u.Id,
+            //        FullName = u.FullName,
+            //        Birthdate = u.Birthdate.Date,
+            //        AcademicRecord = c.AcademicRecord,
+            //    }).ToListAsync();
+            List<Student> list = await studentsDb.Students.Include(x => x.AcademicPerfomance).ToListAsync();
+            return list;
         }
 
         
 
-        [HttpGet, Route("edit")]
+        [HttpGet, Route("edit/{id}")]
         public IActionResult EditStudent(int id)
         {
-            Student dbStudent = studentsDb.Students.SingleOrDefault(s => s.Id == id);
-            AcademicPerfomance dbAperf = studentsDb.AcademicPerfomances.SingleOrDefault(s => s.StudentId == id);
-            if (dbStudent == null || dbAperf == null)
+            Student dbStudent = studentsDb.Students.Include(x => x.AcademicPerfomance).SingleOrDefault(s => s.StudentId == id);
+            if (dbStudent == null)
                 return RedirectToAction("Index");
             ViewData["Student"] = dbStudent;
-            ViewData["Academic record"] = dbAperf;
+            ViewData["Action mode"] = "edit";
             return View("EditStudent");
         }
 
+
+
         [HttpPost]
-        public IActionResult EditStudent(int id, Student student, AcademicPerfomance studentPerfomance)
+        public IActionResult EditStudent(Student student, AcademicPerfomance academicPerfomance)
         {
-            Student dbStudent = studentsDb.Students.SingleOrDefault(s => s.Id == id);
-            AcademicPerfomance dbAperf = studentsDb.AcademicPerfomances.SingleOrDefault(s => s.StudentId == id);
-            if (dbStudent != null && dbAperf != null)
+            Student dbStudent = studentsDb.Students.Include(x => x.AcademicPerfomance).SingleOrDefault(s => s.StudentId == student.StudentId);
+            if (dbStudent != null)
             {
                 using (var transaction = studentsDb.Database.BeginTransaction())
                 {
                     try
-                    {
-                        
+                    {   
                         studentsDb.Entry(dbStudent).CurrentValues.SetValues(student);
-                        studentsDb.Entry(dbAperf).CurrentValues.SetValues(studentPerfomance);
+                        dbStudent.AcademicPerfomance.AcademicRecord = academicPerfomance.AcademicRecord; //Пока так, разобраться с прокидыванием ссылок в параметры
                         studentsDb.SaveChanges();
                         transaction.Commit();
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         transaction.Rollback();
+                        throw;
                     }
                 }
             }
-            return Index(); //Сам Url не меняется TODO
+            return Redirect("/");
         }
+
+        //[HttpPost]
+        //public async IActionResult AddStudent(Student student, AcademicPerfomance studentPerfomance)
+        //{
+        //    using(var transaction = studentsDb.Database.BeginTransaction())
+        //    {
+        //        try
+        //        {
+        //            studentsDb.Add(student);
+        //            studentsDb.Add(studentPerfomance);
+        //            await studentsDb.SaveChangesAsync(); //После этого происходит автоинкремент
+        //            student
+        //        }
+        //        catch(Exception e)
+        //        {
+        //            transaction.Rollback();
+        //        }
+        //    }
+        //}
 
 
     }

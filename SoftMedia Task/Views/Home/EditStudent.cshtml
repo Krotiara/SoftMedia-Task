@@ -1,0 +1,30 @@
+﻿@{
+    Student student = ViewData["Student"] as Student;
+    string actionMode = ViewData["Action mode"].ToString();
+    string action = actionMode.Equals("edit") ? "/Home/EditStudent" : "/Home/AddStudent";
+
+
+}
+
+<form method="post" action="@action">
+    <input type="hidden" value="@student.StudentId" name="StudentId" />
+    <input type="hidden" value="@student.AcademicRecordID" name="AcademicRecordID" />
+    <table>
+        <tr>
+            <td><p>Name: </p></td>
+            <td><input type="text" name="FullName" value="@student.FullName" /> </td>
+        </tr>
+        <tr>
+            <td><p>Birthdate :</p></td>
+            <td><input type="date" name="Birthdate" value="@student.Birthdate.Date.ToString("yyyy-MM-dd")" /> </td>
+        </tr>
+        <tr>
+            <td><p>Academic record :</p></td>
+            <td><input type="text" name="AcademicRecord" value="@student.AcademicPerfomance.AcademicRecord" /> </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Ok" /> </td>
+            <td></td>
+        </tr>
+    </table>
+</form>

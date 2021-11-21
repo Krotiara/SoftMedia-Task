@@ -1,9 +1,15 @@
-﻿@model IEnumerable<StudentDto>
+﻿@model Student
 
 @{
+    List<Student> students = ViewData["Students"] as List<Student>;
     ViewData["Title"] = "Students";
 }
 
+<!DOCTYPE html>
+<head>
+    <title>@ViewData["Title"] - App</title>
+</head>
+<body>
 <table class="table-condensed">
     <tr>
         <td>
@@ -13,10 +19,10 @@
             @Html.DisplayNameFor(model => model.Birthdate)
         </td>
         <td>
-            @Html.DisplayNameFor(model => model.AcademicRecord)
+            @Html.DisplayNameFor(model => model.AcademicPerfomance.AcademicRecord)
         </td>
     </tr>
-    @foreach (var item in Model)
+    @foreach (var item in students)
     {
         <tr>
             <td>
@@ -26,11 +32,12 @@
                 @item.Birthdate.Date
             </td>
             <td>
-                @item.AcademicRecord
+                @item.AcademicPerfomance.AcademicRecord
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditStudent", "Home", new { id = item.Id }) | @Html.ActionLink("Delete", "DeleteStudent", "Home", new { id = item.Id })
+                @Html.ActionLink("Edit", "EditStudent", "Home", new { id = item.StudentId }) | @Html.ActionLink("Delete", "DeleteStudent", "Home", new { id = item.StudentId })
             </td>
         </tr>
     }
 </table>
+    </body>
