@@ -52,14 +52,18 @@ namespace SoftMedia_Task.Controllers
             if (dbStudent == null)
                 return RedirectToAction("Index");
             ViewData["Student"] = dbStudent;
-            ViewData["Action mode"] = "edit";
             return View("EditStudent");
+        }
+
+        public IActionResult AddStudent()
+        {
+            return View("AddStudent");
         }
 
 
 
         [HttpPost]
-        public IActionResult EditStudent(Student student, AcademicPerfomance academicPerfomance)
+        public IActionResult EditStudent(Student student)
         {
             Student dbStudent = studentsDb.Students.Include(x => x.AcademicPerfomance).SingleOrDefault(s => s.StudentId == student.StudentId);
             if (dbStudent != null)
@@ -69,15 +73,40 @@ namespace SoftMedia_Task.Controllers
                     try
                     {   
                         studentsDb.Entry(dbStudent).CurrentValues.SetValues(student);
-                        dbStudent.AcademicPerfomance.AcademicRecord = academicPerfomance.AcademicRecord; //Пока так, разобраться с прокидыванием ссылок в параметры
+                        dbStudent.AcademicPerfomance.AcademicRecord = student.AcademicPerfomance.AcademicRecord; //Пока так, временный костыль.
+                        //studentsDb.Entry(dbStudent.AcademicPerfomance).CurrentValues.SetValues(student.AcademicPerfomance); //error из-за попытки изменить primary key
                         studentsDb.SaveChanges();
                         transaction.Commit();
+
                     }
                     catch (Exception e)
                     {
                         transaction.Rollback();
                         throw;
                     }
+                }
+            }
+            return Redirect("/");
+        }
+
+        [HttpPost]
+        public IActionResult AddStudent(Student student)
+        {
+            using (var transaction = studentsDb.Database.BeginTransaction())
+            {
+                try
+                {
+                    student.AcademicPerfomance.Student =  student; //Почему не автоматом ставится, разобраться
+                    studentsDb.Students.Add(student);
+                    studentsDb.AcademicPerfomances.Add(student.AcademicPerfomance);
+                    studentsDb.SaveChanges();
+                    transaction.Commit();
+
+                }
+                catch (Exception e)
+                {
+                    transaction.Rollback();
+                    throw;
                 }
             }
             return Redirect("/");

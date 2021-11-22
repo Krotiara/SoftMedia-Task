@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-//using System.Data.Entity;
 
 
 namespace SoftMedia_Task.Models
@@ -27,6 +26,15 @@ namespace SoftMedia_Task.Models
                 .WithOne(a => a.Student)
                 .HasForeignKey<AcademicPerfomance>(a => a.StudentId)
                 .IsRequired();
+           
+           
+            modelBuilder.Entity<Student>()
+                .Property(s => s.StudentId)
+                .ValueGeneratedOnAdd();
+            modelBuilder.Entity<AcademicPerfomance>()
+               .Property(p => p.AcademicRecordID)
+               .ValueGeneratedOnAdd();
+
             //https://docs.microsoft.com/en-us/ef/core/modeling/relationships?tabs=fluent-api%2Cfluent-api-simple-key%2Csimple-key
             //https://metanit.com/sharp/entityframeworkcore/2.13.php
 
