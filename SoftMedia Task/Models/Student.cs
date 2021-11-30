@@ -10,6 +10,19 @@ namespace SoftMedia_Task.Models
     [Table("Students")]
     public class Student
     {
+        public Student()
+        {
+            //suitable constructor for entity type
+        }
+
+        public Student(string name, DateTime birthdate, AcademicPerfomance academicPerfomance)
+        {
+            FullName = name;
+            Birthdate = birthdate;
+            AcademicPerfomance = academicPerfomance;
+            AcademicPerfomance.Student = this;
+        }
+
         [Key]
         //[DatabaseGenerated(DatabaseGeneratedOption.Identity)] //база данных сама генерирует значение
         [Column("Id")]
@@ -28,5 +41,8 @@ namespace SoftMedia_Task.Models
         //Свойство навигации: ICollection<T>: https://docs.microsoft.com/ru-ru/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/creating-a-more-complex-data-model-for-an-asp-net-mvc-application
         //public int AcademicRecordID { get; set; }
         public AcademicPerfomance AcademicPerfomance { get; set; }
+
+
+      
     }
 }

@@ -35,6 +35,10 @@ namespace SoftMedia_Task.Models
                .Property(p => p.AcademicRecordID)
                .ValueGeneratedOnAdd();
 
+            modelBuilder.Entity<AcademicPerfomance>()
+                .Property(p => p.AcademicRecord)
+                .HasConversion<string>(); //Пока так, если без descriptions.
+
             //https://docs.microsoft.com/en-us/ef/core/modeling/relationships?tabs=fluent-api%2Cfluent-api-simple-key%2Csimple-key
             //https://metanit.com/sharp/entityframeworkcore/2.13.php
 

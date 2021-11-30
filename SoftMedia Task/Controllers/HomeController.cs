@@ -6,11 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SoftMedia_Task.Controllers
 {
-    //[Route("[controller]")]
     public class HomeController : Controller
     {
         StudentContext studentsDb;
@@ -31,19 +31,11 @@ namespace SoftMedia_Task.Controllers
         [HttpGet, Route("data")]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudentsList()
         {
-            //var items = await studentsDb.Students.Join(studentsDb.AcademicPerfomances, u => u.AcademicPerfomance.Id, c => c.Id,
-            //    (u, c) => new StudentDto
-            //    {
-            //        Id = u.Id,
-            //        FullName = u.FullName,
-            //        Birthdate = u.Birthdate.Date,
-            //        AcademicRecord = c.AcademicRecord,
-            //    }).ToListAsync();
             List<Student> list = await studentsDb.Students.Include(x => x.AcademicPerfomance).ToListAsync();
             return list;
         }
 
-        
+
 
         [HttpGet, Route("edit/{id}")]
         public IActionResult EditStudent(int id)
@@ -55,13 +47,6 @@ namespace SoftMedia_Task.Controllers
             return View("EditStudent");
         }
 
-        public IActionResult AddStudent()
-        {
-            return View("AddStudent");
-        }
-
-
-
         [HttpPost]
         public IActionResult EditStudent(Student student)
         {
@@ -71,7 +56,7 @@ namespace SoftMedia_Task.Controllers
                 using (var transaction = studentsDb.Database.BeginTransaction())
                 {
                     try
-                    {   
+                    {
                         studentsDb.Entry(dbStudent).CurrentValues.SetValues(student);
                         dbStudent.AcademicPerfomance.AcademicRecord = student.AcademicPerfomance.AcademicRecord; //Пока так, временный костыль.
                         //studentsDb.Entry(dbStudent.AcademicPerfomance).CurrentValues.SetValues(student.AcademicPerfomance); //error из-за попытки изменить primary key
@@ -87,6 +72,12 @@ namespace SoftMedia_Task.Controllers
                 }
             }
             return Redirect("/");
+        }
+        
+        [HttpGet]
+        public IActionResult AddStudent()
+        {
+            return View("AddStudent");
         }
 
         [HttpPost]
@@ -111,26 +102,5 @@ namespace SoftMedia_Task.Controllers
             }
             return Redirect("/");
         }
-
-        //[HttpPost]
-        //public async IActionResult AddStudent(Student student, AcademicPerfomance studentPerfomance)
-        //{
-        //    using(var transaction = studentsDb.Database.BeginTransaction())
-        //    {
-        //        try
-        //        {
-        //            studentsDb.Add(student);
-        //            studentsDb.Add(studentPerfomance);
-        //            await studentsDb.SaveChangesAsync(); //После этого происходит автоинкремент
-        //            student
-        //        }
-        //        catch(Exception e)
-        //        {
-        //            transaction.Rollback();
-        //        }
-        //    }
-        //}
-
-
     }
 }
