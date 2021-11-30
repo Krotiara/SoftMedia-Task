@@ -3,3 +3,6 @@
 Требования:
 .Net Core, DI, EntityFramework, Postgres
 Подключить SwaggerUI, и не забыть про тесты.
+
+
+in working 
