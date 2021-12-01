@@ -13,7 +13,7 @@ namespace SoftMedia_Task.Controllers
 {
     public class HomeController : Controller
     {
-        StudentContext studentsDb;
+        readonly StudentContext studentsDb;
         public HomeController(StudentContext context)
         {
             studentsDb = context;
@@ -29,18 +29,24 @@ namespace SoftMedia_Task.Controllers
         }
 
         [HttpGet, Route("data")]
-        public async Task<ActionResult<IEnumerable<Student>>> GetStudentsList()
+        public async Task<List<Student>> GetStudentsList()
         {
             List<Student> list = await studentsDb.Students.Include(x => x.AcademicPerfomance).ToListAsync();
             return list;
         }
 
 
+        
+        public Student GetStudent(int id)
+        {
+            return studentsDb.Students.Include(x => x.AcademicPerfomance).SingleOrDefault(s => s.StudentId == id);
+        }
+
 
         [HttpGet, Route("edit/{id}")]
         public IActionResult EditStudent(int id)
         {
-            Student dbStudent = studentsDb.Students.Include(x => x.AcademicPerfomance).SingleOrDefault(s => s.StudentId == id);
+            Student dbStudent = GetStudent(id);
             if (dbStudent == null)
                 return RedirectToAction("Index");
             ViewData["Student"] = dbStudent;
@@ -50,7 +56,7 @@ namespace SoftMedia_Task.Controllers
         [HttpPost]
         public IActionResult EditStudent(Student student)
         {
-            Student dbStudent = studentsDb.Students.Include(x => x.AcademicPerfomance).SingleOrDefault(s => s.StudentId == student.StudentId);
+            Student dbStudent = GetStudent(student.StudentId);
             if (dbStudent != null)
             {
                 using (var transaction = studentsDb.Database.BeginTransaction())
@@ -101,6 +107,36 @@ namespace SoftMedia_Task.Controllers
                 }
             }
             return Redirect("/");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            ViewData["Student id"] = id;
+            return PartialView("DeleteDialog");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteStudent(int id)
+        {
+            using (var transaction = studentsDb.Database.BeginTransaction())
+            {
+                try
+                {
+                    Student student = GetStudent(id);
+                    studentsDb.AcademicPerfomances.Remove(student.AcademicPerfomance);
+                    studentsDb.Students.Remove(student);
+                    studentsDb.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception e)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }
