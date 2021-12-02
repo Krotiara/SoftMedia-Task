@@ -17,7 +17,6 @@ namespace SoftMedia_Task.Models
             FullName = name;
             Birthdate = birthdate;
             AcademicPerfomance = academicPerfomance;
-            AcademicPerfomance.Student = this;
         }
 
         [Key]

@@ -62,21 +62,19 @@ namespace SoftMedia_Task
             app.UseRouting(); 
 
             app.UseAuthorization();
+
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "SoftMedia Task");
                 //options.RoutePrefix = string.Empty; // provide Swagger UI in the root 
             });
+
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllers();
-                //endpoints.MapControllers();
-                //// swagger / index.html
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-               
             });
             
 

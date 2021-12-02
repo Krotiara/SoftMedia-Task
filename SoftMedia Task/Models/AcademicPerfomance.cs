@@ -18,7 +18,6 @@ namespace SoftMedia_Task.Models
         //Внешний ключ
         [Column("StudentId")]
         public int StudentId { get; set; }
-        public Student Student { get; set; }
     }
 
     public enum AcademicRecords

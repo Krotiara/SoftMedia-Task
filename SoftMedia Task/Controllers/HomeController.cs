@@ -96,7 +96,6 @@ namespace SoftMedia_Task.Controllers
                 {
                     try
                     {
-                        student.AcademicPerfomance.Student = student; //Почему не автоматом ставится, разобраться
                         studentsDb.Students.Add(student);
                         studentsDb.AcademicPerfomances.Add(student.AcademicPerfomance);
                         studentsDb.SaveChanges();
@@ -139,6 +138,12 @@ namespace SoftMedia_Task.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult GoToSwaggerUI()
+        {
+            return Redirect("/swagger");
         }
     }
 }

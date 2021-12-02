@@ -19,7 +19,7 @@ namespace SoftMedia_Task.Models
             //но при этом, с помощью аннотаций нельзя настроить некоторые сложные моменты, для которых используется Fluent API.
             modelBuilder.Entity<Student>()
                 .HasOne<AcademicPerfomance>(s => s.AcademicPerfomance)
-                .WithOne(a => a.Student)
+                .WithOne()
                 .HasForeignKey<AcademicPerfomance>(a => a.StudentId)
                 .IsRequired();
            
