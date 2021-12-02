@@ -13,34 +13,35 @@
     <div>
         <p>@Html.ActionLink("Add", "AddStudent", "Home")</p>
     </div>
-<table class="table-condensed">
-    <tr>
-        <td>
-            @Html.DisplayNameFor(model => model.FullName)
-        </td>
-        <td>
-            @Html.DisplayNameFor(model => model.Birthdate)
-        </td>
-        <td>
-            @Html.DisplayNameFor(model => model.AcademicPerfomance.AcademicRecord)
-        </td>
-    </tr>
-    @foreach (var item in students)
-    {
+    <div><b>Students table</b><br /></div>
+    <table class="table table-bordered table-hover">
         <tr>
-            <td>
-                @item.FullName
-            </td>
-            <td>
-                @item.Birthdate.Date
-            </td>
-            <td>
-                @item.AcademicPerfomance.AcademicRecord
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "EditStudent", "Home", new { id = item.StudentId }) | @Html.ActionLink("Delete", "Delete", "Home", new { id = item.StudentId })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Birthdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcademicPerfomance.AcademicRecord)
+            </th>
         </tr>
-    }
-</table>
-    </body>
+        @foreach (var item in students)
+        {
+            <tr>
+                <td>
+                    @item.FullName
+                </td>
+                <td>
+                    @item.Birthdate.ToString("yyyy-MM-dd")
+                </td>
+                <td>
+                    @item.AcademicPerfomance.AcademicRecord
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditStudent", "Home", new { id = item.StudentId }) | @Html.ActionLink("Delete", "Delete", "Home", new { id = item.StudentId })
+                </td>
+            </tr>
+        }
+    </table>
+</body>

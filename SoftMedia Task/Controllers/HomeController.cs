@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using SoftMedia_Task.Models;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace SoftMedia_Task.Controllers
@@ -49,35 +46,39 @@ namespace SoftMedia_Task.Controllers
             Student dbStudent = GetStudent(id);
             if (dbStudent == null)
                 return RedirectToAction("Index");
-            ViewData["Student"] = dbStudent;
-            return View("EditStudent");
+            //ViewData["Student"] = dbStudent;
+            return View(dbStudent);
         }
 
         [HttpPost]
         public IActionResult EditStudent(Student student)
         {
-            Student dbStudent = GetStudent(student.StudentId);
-            if (dbStudent != null)
+            if (ModelState.IsValid)
             {
-                using (var transaction = studentsDb.Database.BeginTransaction())
+                Student dbStudent = GetStudent(student.StudentId);
+                if (dbStudent != null)
                 {
-                    try
+                    using (var transaction = studentsDb.Database.BeginTransaction())
                     {
-                        studentsDb.Entry(dbStudent).CurrentValues.SetValues(student);
-                        dbStudent.AcademicPerfomance.AcademicRecord = student.AcademicPerfomance.AcademicRecord; //Пока так, временный костыль.
-                        //studentsDb.Entry(dbStudent.AcademicPerfomance).CurrentValues.SetValues(student.AcademicPerfomance); //error из-за попытки изменить primary key
-                        studentsDb.SaveChanges();
-                        transaction.Commit();
+                        try
+                        {
+                            studentsDb.Entry(dbStudent).CurrentValues.SetValues(student);
+                            dbStudent.AcademicPerfomance.AcademicRecord = student.AcademicPerfomance.AcademicRecord; //Пока так, временный костыль.
+                                                                                                                     //studentsDb.Entry(dbStudent.AcademicPerfomance).CurrentValues.SetValues(student.AcademicPerfomance); //error из-за попытки изменить primary key
+                            studentsDb.SaveChanges();
+                            transaction.Commit();
 
-                    }
-                    catch (Exception e)
-                    {
-                        transaction.Rollback();
-                        throw;
+                        }
+                        catch (Exception e)
+                        {
+                            transaction.Rollback();
+                            throw;
+                        }
                     }
                 }
+                return Redirect("/");
             }
-            return Redirect("/");
+            return View(student);
         }
         
         [HttpGet]
@@ -89,24 +90,30 @@ namespace SoftMedia_Task.Controllers
         [HttpPost]
         public IActionResult AddStudent(Student student)
         {
-            using (var transaction = studentsDb.Database.BeginTransaction())
+            if (ModelState.IsValid)
             {
-                try
+                using (var transaction = studentsDb.Database.BeginTransaction())
                 {
-                    student.AcademicPerfomance.Student =  student; //Почему не автоматом ставится, разобраться
-                    studentsDb.Students.Add(student);
-                    studentsDb.AcademicPerfomances.Add(student.AcademicPerfomance);
-                    studentsDb.SaveChanges();
-                    transaction.Commit();
+                    try
+                    {
+                        student.AcademicPerfomance.Student = student; //Почему не автоматом ставится, разобраться
+                        studentsDb.Students.Add(student);
+                        studentsDb.AcademicPerfomances.Add(student.AcademicPerfomance);
+                        studentsDb.SaveChanges();
+                        transaction.Commit();
 
-                }
-                catch (Exception e)
-                {
-                    transaction.Rollback();
-                    throw;
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                    return Redirect("/");
                 }
             }
-            return Redirect("/");
+
+            return View(student);
+            
         }
 
         [HttpGet]
@@ -129,7 +136,7 @@ namespace SoftMedia_Task.Controllers
                     studentsDb.SaveChanges();
                     transaction.Commit();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     transaction.Rollback();
                     throw;
