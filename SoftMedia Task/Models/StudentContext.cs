@@ -15,32 +15,24 @@ namespace SoftMedia_Task.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Помните, что аннотации позволяют простым образом настраивать конфигурацию Entity Framework,
-            //но при этом, с помощью аннотаций нельзя настроить некоторые сложные моменты, для которых используется Fluent API.
             modelBuilder.Entity<Student>()
                 .HasOne<AcademicPerfomance>(s => s.AcademicPerfomance)
                 .WithOne()
                 .HasForeignKey<AcademicPerfomance>(a => a.StudentId)
                 .IsRequired();
            
-           
             modelBuilder.Entity<Student>()
                 .Property(s => s.StudentId)
                 .ValueGeneratedOnAdd();
+
             modelBuilder.Entity<AcademicPerfomance>()
                .Property(p => p.AcademicRecordID)
                .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<AcademicPerfomance>()
                 .Property(p => p.AcademicRecord)
-                .HasConversion<string>(); //Пока так, если без descriptions.
-
-            //https://docs.microsoft.com/en-us/ef/core/modeling/relationships?tabs=fluent-api%2Cfluent-api-simple-key%2Csimple-key
-            //https://metanit.com/sharp/entityframeworkcore/2.13.php
-
-
-
-
+                .HasConversion<string>();
+   
         }
     }
 }

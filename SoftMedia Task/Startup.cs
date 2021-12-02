@@ -56,18 +56,14 @@ namespace SoftMedia_Task
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-            app.UseHttpsRedirection(); // добавляет для проекта переадресацию на тот же ресурс только по протоколу https
             app.UseStaticFiles();
-
             app.UseRouting(); 
 
-            app.UseAuthorization();
 
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "SoftMedia Task");
-                //options.RoutePrefix = string.Empty; // provide Swagger UI in the root 
             });
 
             app.UseEndpoints(endpoints =>

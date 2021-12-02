@@ -9,7 +9,7 @@ namespace SoftMedia_Task.Models
     {
         public Student()
         {
-            //suitable constructor for entity type
+            //suitable constructor for entity type for awoid EF error No suitable constructor found for entity type
         }
 
         public Student(string name, DateTime birthdate, AcademicPerfomance academicPerfomance)
