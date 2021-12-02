@@ -2,7 +2,7 @@
 
 
 <form method="post" action="/Home/AddStudent">
-    <div><b>Add student</b><br /><br /></div>
+    <div><p style="font-size:20px"><b>Add student</b></p><br /></div>
     @{
         await Html.RenderPartialAsync("StudentView", Model);
     }
