@@ -81,7 +81,7 @@ namespace SoftMedia_Task.Controllers
             return View(student);
         }
         
-        [HttpGet]
+        [HttpGet, Route("add")]
         public IActionResult AddStudent()
         {
             return View("AddStudent");
@@ -118,6 +118,7 @@ namespace SoftMedia_Task.Controllers
       
         [HttpGet]
         [HttpPost]
+        [Route("delete/{id}")]
         public IActionResult DeleteStudent(int id)
         {
             using (var transaction = studentsDb.Database.BeginTransaction())
