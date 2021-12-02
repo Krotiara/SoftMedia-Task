@@ -13,15 +13,18 @@ namespace SoftMedia_Task.Controllers
         readonly StudentContext studentsDb;
         public HomeController(StudentContext context)
         {
+            //Getting the dbcontext occurs through DI into the constructor.  
             studentsDb = context;
         }
 
+        /// <summary>
+        /// Show all students with their attributes.
+        /// </summary>
+        /// <returns>return View with student`s table.</returns>
         [HttpGet]
         public IActionResult Index()
         {
-            // IEnumerable<StudentDto> items = GetStudentsList().Result.Value;
-            ViewData["Students"] = studentsDb.Students.Include(x => x.AcademicPerfomance).ToList(); //Async todo
-            //return View("Index", GetStudentsList().Result.Value);
+            ViewData["Students"] = GetStudentsList().Result;
             return View("Index");
         }
 
@@ -46,7 +49,6 @@ namespace SoftMedia_Task.Controllers
             Student dbStudent = GetStudent(id);
             if (dbStudent == null)
                 return RedirectToAction("Index");
-            //ViewData["Student"] = dbStudent;
             return View(dbStudent);
         }
 
@@ -55,26 +57,21 @@ namespace SoftMedia_Task.Controllers
         {
             if (ModelState.IsValid)
             {
-                Student dbStudent = GetStudent(student.StudentId);
-                if (dbStudent != null)
+                using (var transaction = studentsDb.Database.BeginTransaction()) 
+                //После рефакторинга по идее транзакции уже не требуется, т.к. уже нет последовательности операций, а только Update.
                 {
-                    using (var transaction = studentsDb.Database.BeginTransaction())
+                    try
                     {
-                        try
-                        {
-                            studentsDb.Entry(dbStudent).CurrentValues.SetValues(student);
-                            dbStudent.AcademicPerfomance.AcademicRecord = student.AcademicPerfomance.AcademicRecord; //Пока так, временный костыль.
-                                                                                                                     //studentsDb.Entry(dbStudent.AcademicPerfomance).CurrentValues.SetValues(student.AcademicPerfomance); //error из-за попытки изменить primary key
-                            studentsDb.SaveChanges();
-                            transaction.Commit();
+                        studentsDb.Update(student);
+                        studentsDb.SaveChanges();
+                        transaction.Commit();
 
-                        }
-                        catch (Exception e)
-                        {
-                            transaction.Rollback();
-                            throw;
-                        }
                     }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                    }
+
                 }
                 return Redirect("/");
             }
@@ -105,7 +102,6 @@ namespace SoftMedia_Task.Controllers
                     catch (Exception)
                     {
                         transaction.Rollback();
-                        throw;
                     }
                     return Redirect("/");
                 }
@@ -116,7 +112,7 @@ namespace SoftMedia_Task.Controllers
         }
 
       
-        [HttpGet]
+        [HttpGet] //Появилась из-за @Html.ActionLink (в Index View), который создает только Get запрос.
         [HttpPost]
         [Route("delete/{id}")]
         public IActionResult DeleteStudent(int id)

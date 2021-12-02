@@ -3,6 +3,7 @@
 
 <form method="post" action="/Home/EditStudent">
     @Html.HiddenFor(model => model.StudentId)
+    @Html.HiddenFor(model => model.AcademicPerfomance.AcademicRecordID)
     <div><p style="font-size:20px"><b>Edit student</b></p><br /></div>
     @{
         await Html.RenderPartialAsync("StudentView", Model);
