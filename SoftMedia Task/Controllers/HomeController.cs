@@ -25,13 +25,13 @@ namespace SoftMedia_Task.Controllers
             return View("Index");
         }
 
+
         [HttpGet, Route("data")]
         public async Task<List<Student>> GetStudentsList()
         {
             List<Student> list = await studentsDb.Students.Include(x => x.AcademicPerfomance).ToListAsync();
             return list;
         }
-
 
         
         public Student GetStudent(int id)
@@ -116,13 +116,8 @@ namespace SoftMedia_Task.Controllers
             
         }
 
+      
         [HttpGet]
-        public IActionResult Delete(int id)
-        {
-            ViewData["Student id"] = id;
-            return PartialView("DeleteDialog");
-        }
-
         [HttpPost]
         public IActionResult DeleteStudent(int id)
         {

@@ -1,0 +1,34 @@
+﻿@model Student
+
+<div class="form-group row">
+    <div class="col-md-1">
+        <label>Name</label>
+    </div>
+    <div class="col-md-2">
+        @Html.EditorFor(model => model.FullName)
+    </div>
+    <div class="col-md-3">
+        @Html.ValidationMessageFor(model => model.FullName, null, new { @class = "text-danger" })
+    </div>
+</div>
+<div class="form-group row">
+    <div class="col-md-1">
+        <label>Birthdate</label>
+    </div>
+    <div class="col-md-2">
+        @Html.TextBoxFor(model => model.Birthdate, "{0:yyyy-MM-dd}", new { @type = "date" })
+    </div>
+</div>
+<div class="form-group row">
+    <div class="col-md-1">
+        <label>Academic record</label>
+    </div>
+    <div class="col-md-2">
+        <select asp-for="AcademicPerfomance.AcademicRecord" asp-items="Html.GetEnumSelectList<AcademicRecords>()"></select>
+    </div>
+</div>
+<div class="form-group row">
+    <div class="col-md-2">
+        <input type="submit" value="Ok" />
+    </div>
+</div>
