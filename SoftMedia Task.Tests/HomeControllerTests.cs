@@ -81,20 +81,11 @@ namespace SoftMedia_Task.Tests
         {
             using var context = new StudentContext(dbContextOptions);
             Student student = context.Students.Include(x => x.AcademicPerfomance).First();
-
-            Student studentToEdit = new Student("Edit test",
-                student.Birthdate,
-                new AcademicPerfomance()
-                {
-                    AcademicRecord = AcademicRecords.Bad,
-                    AcademicRecordID = student.AcademicPerfomance.AcademicRecordID,
-                    StudentId = student.StudentId,
-                });
-            studentToEdit.StudentId = student.StudentId;
-
+            student.FullName = "Edit test";
+            student.AcademicPerfomance.AcademicRecord = AcademicRecords.Bad;
 
             HomeController controller = new HomeController(context);
-            controller.EditStudent(studentToEdit);
+            controller.EditStudent(student);
 
             Student editedStudent = context.Students.Include(x => x.AcademicPerfomance).First();
             Assert.Equal("Edit test", editedStudent.FullName);

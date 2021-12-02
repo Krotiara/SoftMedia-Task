@@ -53,7 +53,7 @@ namespace SoftMedia_Task.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditStudent(Student student)
+        public async Task<IActionResult> EditStudent(Student student)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +63,7 @@ namespace SoftMedia_Task.Controllers
                     try
                     {
                         studentsDb.Update(student);
-                        studentsDb.SaveChanges();
+                        await studentsDb.SaveChangesAsync();
                         transaction.Commit();
 
                     }
@@ -85,7 +85,7 @@ namespace SoftMedia_Task.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddStudent(Student student)
+        public async Task<IActionResult> AddStudent(Student student)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace SoftMedia_Task.Controllers
                     {
                         studentsDb.Students.Add(student);
                         studentsDb.AcademicPerfomances.Add(student.AcademicPerfomance);
-                        studentsDb.SaveChanges();
+                        await studentsDb.SaveChangesAsync();
                         transaction.Commit();
 
                     }
@@ -106,9 +106,7 @@ namespace SoftMedia_Task.Controllers
                     return Redirect("/");
                 }
             }
-
-            return View(student);
-            
+            return View(student);       
         }
 
       
